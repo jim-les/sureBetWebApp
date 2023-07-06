@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'api/games.css' %}">
+    <title>sureBet</title>
+</head>
+<body>
+    <nav>
+        <h1>sureBet</h1>
+    </nav>
+    <section>
+
+        <div class="card">
+
+            <div class="cardTop">
+                <div class="gameDetails">
+                    <div class="competition">
+                        <img src="{% static 'api/assets/premier-league-logo.png' %}" alt="" srcset="">
+                    </div>
+                    <p class="homeTeam">Arsenal</p>
+                    <span> - </span>
+                    <div class="awayTeam">Chelsea</div>
+                </div>
+                <div class="gameOdds">
+                    <p class="hOdd">1.26</p>
+                    <p class="dOdd">3.8</p>
+                    <p class="aOdd">5.2</p>
+                </div>
+                <div class="gameDateTime">
+                    <p class="date">02-05-2023</p>
+                    <p class="time">00:00</p>
+                    <p class="blank"></p>
+                </div>
+            </div>
+
+            <div class="cardBottom">
+                <p class="prediction">Arsenal win</p>
+                <p class="result"></p>
+            </div>
+
+        </div>
+
+        <!--
+        <div class="table">
+            <div class="tableTitle">
+                <div>Competition</div>
+                <div>Home</div>
+                <div>vs</div>
+                <div>Away</div>
+                <div>1</div>
+                <div>X</div>
+                <div>2</div>
+            </div>
+
+            <div class="tableContent">
+                <div class="rowTop">
+                    <img src="{{ competition.competition_image.url }}" alt="leagueLogo">
+                    <p class="home">Arsenal</p>
+                    <p class="vs">Vs</p>
+                    <p class="away">Chelsea</p>
+                    <p class="hOdd">1.64</p>
+                    <p class="dOdd">3.87</p>
+                    <p class="aOdd">5.09</p>
+                </div>
+                <div class="rowBottom">
+                    <p>Match Winner-Away</p>
+                </div>
+            </div>
+        </div>
+        -->
+    </section>
+</body>
+</html>
+<!-- Competition Home vs Away HO - DO - AO -->

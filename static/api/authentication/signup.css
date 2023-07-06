@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 
+DARK BLUE
+    #020f1a
+    208°, 86%, 5%
+    rgb(2, 15, 26)
+
+LIGHT BLUE
+    rgb(62,158,245)
+    #3e9df5
+    209°, 90%, 60%
+
+BLUEISH WHITE
+    rgb(230,238,253)
+    #e6eefd
+    219°, 85%, 95%
+*/
+body, main{
+    background-color: rgb(2, 15, 26);
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+form{
+    background-color: hsl(219, 85%, 88%);
+    width: 300px;
+    min-height: 40vh;
+    border-radius: 4px;
+}

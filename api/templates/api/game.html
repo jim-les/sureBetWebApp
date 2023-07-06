@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'api/game.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <section class="table">
+        <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th>HOME</th>
+                <th>DRAW</th>
+                <th>AWAY</th>
+                <th>RESULT</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+              <tr class="gameData">
+                <td class="timeWrapper">
+                    <p class="time"></p>
+                    <p class="date">{{ game.game_date }}/{{ game.game_month }}/ {{ game.game_year }}</p>
+                </td>
+                <td class="teamsWrapper">
+                    <div class="teams">
+                        <p class="teamHome">{{ game.home_team_name }}</p>
+                        <span></span>
+                        <p class="teamAway">{{ game.away_team_name }}</p>
+                    </div>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddLeft">{{ game.home_odd }}</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddMiddle">{{ game.draw_odd }}</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddRight">{{ game.away_odd }}</p>
+                </td>
+                <td>WON</td>
+              </tr>
+              {% endfor %}
+              <!-- <tr class="gameData">
+                <td class="timeWrapper">
+                    <p class="time">15:15</p>
+                    <p class="date">07/05/23</p>
+                </td>
+                <td class="teamsWrapper">
+                    <div class="teams">
+                        <p class="teamHome">ATALANTA</p>
+                        <span></span>
+                        <p class="teamAway">JUVENTUS</p>
+                    </div>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddLeft">2.36</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddMiddle">3.28</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddRight">2.98</p>
+                </td>
+                <td class="oddWrapper overUnder">
+                    <p class="oddLeft">1.99</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddRight">1.73</p>
+                </td>
+                <td>30</td>
+              </tr>
+
+              <tr class="gameData">
+                <td class="timeWrapper">
+                    <p class="time">15:15</p>
+                    <p class="date">07/05/23</p>
+                </td>
+                <td class="teamsWrapper">
+                    <div class="teams">
+                        <p class="teamHome">ATALANTA</p>
+                        <span></span>
+                        <p class="teamAway">JUVENTUS</p>
+                    </div>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddLeft">2.36</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddMiddle">3.28</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddRight">2.98</p>
+                </td>
+                <td class="oddWrapper overUnder">
+                    <p class="oddLeft">1.99</p>
+                </td>
+                <td class="oddWrapper">
+                    <p class="oddRight">1.73</p>
+                </td>
+                <td>30</td>
+              </tr> -->
+            </tbody>
+        </table>          
+    </section>
+</body>
+</html>
+<!--  -->

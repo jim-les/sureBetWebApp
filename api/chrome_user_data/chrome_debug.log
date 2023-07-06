@@ -1,0 +1,9 @@
+[10392:7540:0515/213040.760:WARNING:chrome_main_delegate.cc(589)] This is Chrome version 113.0.5672.93 (not a warning)
+[10392:7540:0515/213040.819:INFO:chrome_browser_cloud_management_controller.cc(167)] Starting CBCM Controller Initialization
+[10392:7540:0515/213040.819:INFO:chrome_browser_cloud_management_controller.cc(195)] No machine level policy manager exists.
+[10392:7540:0515/213043.071:INFO:CONSOLE(1)] "Uncaught ReferenceError: $ is not defined", source:  (1)
+[10392:7540:0515/213043.071:INFO:CONSOLE(1)] "Uncaught ReferenceError: $ is not defined", source:  (1)
+[10392:7540:0515/213043.071:INFO:CONSOLE(1)] "Uncaught ReferenceError: $ is not defined", source:  (1)
+[10392:7540:0515/213043.406:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://www.betexplorer.com/next/soccer/?year=2023&month=05&day=16 (0)
+[10392:7540:0515/213102.479:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:5086
+[10392:7540:0515/213103.877:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:45146

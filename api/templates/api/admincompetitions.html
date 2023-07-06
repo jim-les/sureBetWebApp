@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'api/admincompetition.css' %}">
+    <title>sureBet - competitions</title>
+</head>
+<body>
+    <nav>
+        <h1>sureBet</h1>
+    </nav>
+    <section>
+        <div class="table">
+            <div class="tableTitle">
+                <div>Competition</div>
+                <div>Image</div>
+            </div>
+            {% for competition in competitions %}
+            <div class="tableContent">
+                <h1>{{ competition.competition_name }}</h1>
+                <div>
+                    <img src="{{ competition.competition_image.url }}" alt="leagueLogo">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- Competition and competition image and an upload button -->
+</body>
+</html>

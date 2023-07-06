@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'api/thepage.css' %}">
+    <title>sureBet</title>
+</head>
+<body>
+    <nav>
+        <h1>sureBets</h1>
+        <div class="user">
+            {% if user.is_authenticated %}
+                <p>{{ user.username }}</p>
+                <a href="{% url 'logout' %}" class="logoutLink">Log out</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="loginLink">Login</a>
+                <a href="{% url 'signUp' %}" class="signUpLink">Join</a>          
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <section class="marqueeWrapper">
+        <section class="marqueeWins">
+            {% for wongame in wongames %}
+            <div class="winContainer">
+                <div class="top">
+                    <p class="homeTeam">{{wongame.home_team}}</p>
+                    <p class="separator">vs</p>
+                    <p class="awayTeam">{{wongame.away_team}}</p>
+                </div>
+        
+                <div class="bottom">
+                    <p>Won</p>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
+
+    
+
+    <section class="table">
+        <div class="filterWrapper">
+            <p id="idFree" class="filter selected">Free</p>
+            <p id="idPaid" class="filter">Paid</p>
+            <p id="idVIP" class="filter">VIP</p>
+            <p id="idWins" class="filter">Wins</p>
+        </div>
+        <div class="vipList hide">
+            <p>Coming soon</p>
+        </div>
+        <div class="wonList hide">
+            <p>Calculating</p>
+        </div>
+    </section>
+
+    <section class="list">
+        {% for game in games %}
+        {% if game.result == "won" or game.result == "lost" %}
+            {% if game.result == "won" %}
+                {% if game.game_paid == True %}
+                <div class="game_container paid">
+                {% else %}
+                <div class="game_container free">
+                {% endif %}
+                    <div class="game_container_top">
+                        <!-- row -->
+                        <div class="game_container_top_left">
+                            <div class="game_details">
+                                <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                            </div>
+                            <div class="game_team_details">
+                                <h2>{{game.game_competition.competition_name}}</h2>
+                                <h4>{{game.home_team}}</h4>
+                                <h4>{{game.away_team}}</h4>
+                            </div>
+                            <div class="gameOdd">
+                                <p>{{game.winning_game_odd}}</p>
+                            </div>
+                        </div>
+
+                        <div class="game_container_top_right">
+                            <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                            <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                            <div class="half_results">
+                                <p class="first_half">{{game.game_first_half_result}}</p>
+                                <p class="separator">/</p>
+                                <p class="second_half">{{game.game_second_half_result}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game_container_bottom">
+                        <!-- row -->
+                        <P class="admin_text_won">{{game.prediction}}</P>
+                        <p class="admin_result_won">{{game.result}}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <!--  -->
+        {% else %}
+            {% if game.game_paid == True %}
+            <div class="game_container paid">
+            {% else %}
+            <div class="game_container free">
+            {% endif %}
+                <div class="game_container_top">
+                    <!-- row -->
+                    <div class="game_container_top_left">
+                        <div class="game_details">
+                            <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                        </div>
+                        <div class="game_team_details">
+                            <h2>{{game.game_competition.competition_name}}</h2>
+                            <h4>{{game.home_team}}</h4>
+                            <h4>{{game.away_team}}</h4>
+                        </div>
+                        <div class="gameOdd">
+                            <p>{{game.winning_game_odd}}</p>
+                        </div>
+                    </div>
+
+                    <div class="game_container_top_right">
+                        <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                        <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                        <div class="half_results">
+                            <p class="first_half">{{game.game_first_half_result}}</p>
+                            <p class="separator">/</p>
+                            <p class="second_half">{{game.game_second_half_result}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="game_container_bottom">
+                    <!-- row -->
+                    <P class="admin_text">{{game.prediction}}</P>
+                    <p class="admin_result">{{game.result}}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% for game in wongames %}
+    {% if game.result == "won" or game.result == "lost" %}
+        {% if game.result == "won" %}
+            {% if game.game_paid == True %}
+            <div class="game_container complete hide">
+            {% else %}
+            <div class="game_container complete hide">
+            {% endif %}
+                <div class="game_container_top">
+                    <!-- row -->
+                    <div class="game_container_top_left">
+                        <div class="game_details">
+                            <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                        </div>
+                        <div class="game_team_details">
+                            <h2>{{game.game_competition.competition_name}}</h2>
+                            <h4>{{game.home_team}}</h4>
+                            <h4>{{game.away_team}}</h4>
+                        </div>
+                        <div class="gameOdd">
+                            <p>{{game.winning_game_odd}}</p>
+                        </div>
+                    </div>
+
+                    <div class="game_container_top_right">
+                        <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                        <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                        <div class="half_results">
+                            <p class="first_half">{{game.game_first_half_result}}</p>
+                            <p class="separator">/</p>
+                            <p class="second_half">{{game.game_second_half_result}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="game_container_bottom">
+                    <!-- row -->
+                    <P class="admin_text_won">{{game.prediction}}</P>
+                    <p class="admin_result_won">{{game.result}}</p>
+                </div>
+            </div>
+        {% endif %}
+
+    {% endif %}
+    {% endfor %}
+    </section>
+
+
+
+    <script src="{% static 'api/thepage.js' %}"></script>
+</body>
+</html>

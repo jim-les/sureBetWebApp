@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sureBetTips</title>
+    <link rel="stylesheet" href="{% static 'api/main/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">sureBet</div>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar">
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="" class="text">{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="" class="text">Guest</a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'logout' %}" class="active">Logout</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}" class="active">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'signUp' %}" class="active">Register</a>
+                    </li>
+                {% endif %}
+
+
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="table">
+            <div class="filterWrapper">
+                <p id="idFree" class="filter selected">Free</p>
+                <p id="idPaid" class="filter">Paid</p>
+                <p id="idVIP" class="filter">VIP</p>
+                <p id="idWins" class="filter">Wins</p>
+            </div>
+        </section>
+       
+        <div class="vip_card_container white_background hide">
+            <img src="{% static 'api/main/star.svg' %}" alt="" srcset="">
+            <h1 class="black_text">Subscription Matches</h1>
+            <div class="status status_red">
+                <p>
+                    IS INACTIVE
+                </p>
+            </div>
+        </div> 
+    
+        <div class="vip_card_container hide">
+            <img src="{% static 'api/main/actionbar_logo_small.png' %}" alt="" srcset="">
+            <h1>SportPesa Jackpot</h1>
+            <div class="status">
+                <p>
+                    IS ACTIVE
+                </p>
+            </div>
+        </div> 
+    
+        <div class="vip_card_container hide">
+            <img src="{% static 'api/main/logo_KE.webp' %}" alt="" srcset="">
+            <h1>Betika Jackpot</h1>
+            <div class="status">
+                <p>
+                    IS INACTIVE
+                </p>
+            </div>
+        </div>
+    
+        <div class="vip_card_container white_background hide">
+            <img src="{% static 'api/main/medal.svg' %}" alt="" srcset="">
+            <h1 class="black_text">Fixed Matches</h1>
+            <div class="status status_red">
+                <p>
+                    IS INACTIVE
+                </p>
+            </div>
+        </div>
+
+        {% for game in games %}
+        <div class="game_container">
+            {% if game.result == "won" %}
+                <span class="details" style="display: none;">WON</span>
+            {% elif game.result == "lost" %}
+                <span class="details" style="display: none;">LOST</span>
+            {% else %}
+                <span class="details" style="display: none;">{{game.game_paid}}</span>
+            {% endif %}
+            <div class="game_container_top">
+                <!-- row -->
+                <div class="game_container_top_left">
+                    <div class="game_details">
+                        <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                    </div>
+                    <div class="game_team_details">
+                        <h2>{{ game.game_competition.competition_name }}</h2>
+                        <h4>{{ game.home_team}}</h4>
+                        <h4>{{ game.away_team}}</h4>
+                    </div>
+                    <div class="gameOdd">
+                        <p>{{ game.winning_game_odd }}</p>
+                    </div>
+                </div>
+    
+                <div class="game_container_top_right">
+                    <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                    <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                    <div class="half_results">
+                        <p class="first_half">{{game.game_first_half_result}}</p>
+                        <p class="separator">/</p>
+                        <p class="second_half">{{game.game_second_half_result}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="game_container_bottom">
+                <!-- row -->
+                <P class="admin_text">{{game.prediction}}</P>
+                <p class="admin_result">{{game.result}}</p>
+            </div>
+            <div class="game_container_comments">
+                <p class="game_comment">Example comment</p>
+            </div>
+            <div class="alertImage">
+                <img src="{% static 'api/main/warning-circle.svg' %}" alt="moreinfo" srcset="">
+            </div>
+            <p style="display: none;">{{game.game_paid}}</p>
+        </div>
+        {% endfor %}
+        
+        {% for game in betikagames %}
+        <div class="game_container">
+            {% if game.result == "won" %}
+                <span class="details" style="display: none;">WON</span>
+            {% elif game.result == "lost" %}
+                <span class="details" style="display: none;">LOST</span>
+            {% else %}
+                <span class="details" style="display: none;">BETIKA</span>
+            {% endif %}
+            <div class="game_container_top">
+                <!-- row -->
+                <div class="game_container_top_left">
+                    <div class="game_details">
+                        <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                    </div>
+                    <div class="game_team_details">
+                        <h2>{{ game.game_competition.competition_name }}</h2>
+                        <h4>{{ game.home_team}}</h4>
+                        <h4>{{ game.away_team}}</h4>
+                    </div>
+                    <div class="gameOdd">
+                        <p>{{ game.winning_game_odd }}</p>
+                    </div>
+                </div>
+    
+                <div class="game_container_top_right">
+                    <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                    <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                    <div class="half_results">
+                        <p class="first_half">{{game.game_first_half_result}}</p>
+                        <p class="separator">/</p>
+                        <p class="second_half">{{game.game_second_half_result}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="game_container_bottom">
+                <!-- row -->
+                <P class="admin_text">{{game.prediction}}</P>
+                <p class="admin_result">{{game.result}}</p>
+            </div>
+            <div class="game_container_comments">
+                <p class="game_comment">Example comment</p>
+            </div>
+            <div class="alertImage">
+                <img src="{% static 'api/main/warning-circle.svg' %}" alt="moreinfo" srcset="">
+            </div>
+            <p style="display: none;">{{game.game_paid}}</p>
+        </div>
+        {% endfor %}
+
+        {% for game in sportpesagames %}
+        <div class="game_container">
+            {% if game.result == "won" %}
+                <span class="details" style="display: none;">WON</span>
+            {% elif game.result == "lost" %}
+                <span class="details" style="display: none;">LOST</span>
+            {% else %}
+                <span class="details" style="display: none;">SPORTPESA</span>
+            {% endif %}
+            <div class="game_container_top">
+                <!-- row -->
+                <div class="game_container_top_left">
+                    <div class="game_details">
+                        <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                    </div>
+                    <div class="game_team_details">
+                        <h2>{{ game.game_competition.competition_name }}</h2>
+                        <h4>{{ game.home_team}}</h4>
+                        <h4>{{ game.away_team}}</h4>
+                    </div>
+                    <div class="gameOdd">
+                        <p>{{ game.winning_game_odd }}</p>
+                    </div>
+                </div>
+    
+                <div class="game_container_top_right">
+                    <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                    <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                    <div class="half_results">
+                        <p class="first_half">{{game.game_first_half_result}}</p>
+                        <p class="separator">/</p>
+                        <p class="second_half">{{game.game_second_half_result}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="game_container_bottom">
+                <!-- row -->
+                <P class="admin_text">{{game.prediction}}</P>
+                <p class="admin_result">{{game.result}}</p>
+            </div>
+            <div class="game_container_comments">
+                <p class="game_comment">Example comment</p>
+            </div>
+            <div class="alertImage">
+                <img src="{% static 'api/main/warning-circle.svg' %}" alt="moreinfo" srcset="">
+            </div>
+            <p style="display: none;">{{game.game_paid}}</p>
+        </div>
+        {% endfor %}
+
+        {% for game in subscriptiongames %}
+        <div class="game_container">
+            {% if game.result == "won" %}
+                <span class="details" style="display: none;">WON</span>
+            {% elif game.result == "lost" %}
+                <span class="details" style="display: none;">LOST</span>
+            {% else %}
+                <span class="details" style="display: none;">SUBSCRIPTION</span>
+            {% endif %}
+            <div class="game_container_top">
+                <!-- row -->
+                <div class="game_container_top_left">
+                    <div class="game_details">
+                        <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                    </div>
+                    <div class="game_team_details">
+                        <h2>{{ game.game_competition.competition_name }}</h2>
+                        <h4>{{ game.home_team}}</h4>
+                        <h4>{{ game.away_team}}</h4>
+                    </div>
+                    <div class="gameOdd">
+                        <p>{{ game.winning_game_odd }}</p>
+                    </div>
+                </div>
+    
+                <div class="game_container_top_right">
+                    <p class="date">{{game.game_year}}-{{game.game_month}}-{{game.game_date}}</p>
+                    <p class="time">{{game.game_hour}}:{{game.game_minute}}</p>
+                    <div class="half_results">
+                        <p class="first_half">{{game.game_first_half_result}}</p>
+                        <p class="separator">/</p>
+                        <p class="second_half">{{game.game_second_half_result}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="game_container_bottom">
+                <!-- row -->
+                <P class="admin_text">{{game.prediction}}</P>
+                <p class="admin_result">{{game.result}}</p>
+            </div>
+            <div class="game_container_comments">
+                <p class="game_comment">Example comment</p>
+            </div>
+            <div class="alertImage">
+                <img src="{% static 'api/main/warning-circle.svg' %}" alt="moreinfo" srcset="">
+            </div>
+            <p style="display: none;">{{game.game_paid}}</p>
+        </div>
+        {% endfor %}
+
+    
+    </main>
+
+    <script>
+        hamburger = document.querySelector(".hamburger")
+        hamburger.onclick = function() {
+            navBar = document.querySelector(".nav-bar")
+            navBar.classList.toggle("active")
+        }
+    </script>
+    <script src="{% static 'api/main/main.js' %}"></script>
+</body>
+</html>

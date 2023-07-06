@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'api/homepage.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <h1>sureBet</h1>
+        <!-- <ul>
+            <li>
+                <a href="">Free</a>
+            </li>
+            <li>
+                <a href="">Paid</a>
+            </li>
+            <li>
+                <a href="">VIP</a>
+            </li>
+            <li>
+                <a href="">Wins</a>
+            </li>
+        </ul> -->
+        <div class="user">
+            {% if user.is_authenticated %}
+                <p>{{ user.username }}</p>
+                <a href="{% url 'logout' %}" class="logoutLink">Log out</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="loginLink">Login</a>
+                <a href="{% url 'signUp' %}" class="signUpLink">Join</a>          
+            {% endif %}
+        </div>
+    </nav>
+    <main>
+        <section class="table">
+            <div class="filterWrapper">
+                <p id="idFree" class="filter selected">Free</p>
+                <p id="idPaid" class="filter">Paid</p>
+                <p id="idVIP" class="filter">VIP</p>
+                <p id="idWins" class="filter">Wins</p>
+            </div>
+            <div class="topWrapper">
+                <p class="game">90 Minutes</p>
+                <p class="title">Home</p>
+                <p class="title">Draw</p>
+                <p class="title">Away</p>
+                <p class="more"></p>
+            </div>
+            <div class="vipList hide">
+                <p>Coming soon</p>
+            </div>
+            <div class="wonList hide">
+                <p>Calculating</p>
+            </div>
+        </section>
+        <dialog class="modal" id="modal">
+            <h2>Edit game.</h2>
+            <div class="teams">
+            </div>
+
+            <form action="/adminupdate/" method="dialog" class="form" method="post" id="my-form">
+                {% csrf_token %}
+                <div class="row">
+                    <label>
+                        <input type="radio" name="homeWin" value="home">
+                        Home Team Win
+                    </label>
+                    <label>
+                        <input type="radio" name="draw" value="draw">
+                        Draw
+                    </label>
+                    <label>
+                        <input type="radio" name="awayWin" value="away">
+                        Away Team Win
+                    </label>
+                </div>
+                <div class="row">
+                    <label>
+                        <input type="radio" name="paid" value="paid">
+                        Paid?
+                    </label>
+                </div>
+                <div class="row">
+                    <button type="submit" class="button close-button">Save</button>
+                    <button class="button close-button">Close</button>
+                </div>
+        </form>
+        </dialog>
+    </main>
+    <script>
+        const form = document.querySelector('#my-form');
+      
+        form.addEventListener('submit', (event) => {
+          // Prevent the default form submission behavior
+          event.preventDefault();
+      
+          // Collect the form data
+          const formData = new FormData(form);
+      
+          // Send an AJAX request to the form's action URL with the form data
+          fetch(form.action, {
+            method: form.method,
+            body: formData
+          })
+            .then(response => {
+              // Handle the server response here
+              console.log("Server response", response)
+            })
+            .catch(error => {
+              // Handle any errors here
+            });
+        });
+      </script>
+    <script>
+        {% if user.is_authenticated and user.is_superuser %}
+            var is_admin = true;
+        {% else %}
+            var is_admin = false;
+        {% endif %}
+    </script>
+    <script src="{% static 'api/home.js' %}"></script>
+</body>
+</html>
