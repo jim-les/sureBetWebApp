@@ -25,6 +25,6 @@ admin.site.site_title = "SureBetTips"
 admin.site.index_title = "Welcome to SureBetTips Admin Portal"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('adminy/', admin.site.urls),
     path('', include('api.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

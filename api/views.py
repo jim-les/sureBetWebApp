@@ -1,4 +1,5 @@
-from .models import Competition, Game, user, AdminGame, FixedMatchGame, BetikaJackpotGame, SportPesaJackpotGame, SubscriptionGame
+from .models import Competition, Game, AdminGame, FixedMatchGame, BetikaJackpotGame, SportPesaJackpotGame, SubscriptionGame
+from .models import user
 from .serializers import GameSerializer, CompetitionSerializer
 
 from rest_framework.response import Response
@@ -14,6 +15,12 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 import json
 
+from django.contrib.auth.models import User
+
+#gatimu
+from django.core.cache import cache
+cache.clear()
+
 # Create your views here.
 @api_view(['GET'])
 def getData(request):
@@ -28,7 +35,7 @@ def signUp(request):
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         password = request.POST.get('password')
-        #print(f"Username is {username}, email is {email}, phone number is {phone} and password is {password}")
+        print(f"Username is {username}, email is {email}, phone number is {phone} and password is {password}")
 
         # Create user
         try:
@@ -51,13 +58,13 @@ def loginUser(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        print(user, "after passing through authentication")
+        user_obj = authenticate(request, username=username, password=password)
+        print(user_obj, "after passing through authentication")
         if user is not None:
             # login user
-            login(request, user)
             messages.success(request, 'Your account has been created successfully.')
-            return redirect(home)
+            login(request, user_obj)
+            return redirect(mainpage)
         # print(username, password)
         pass 
     return render(request, 'api/authentication/login.html')
@@ -70,6 +77,7 @@ def logoutUser(request):
 def home(request):
     games = Game.objects.all()
     context = { 'games' : games }
+
     return render(request, 'api/homepage.html', context)
 
 def homeTest(request):
@@ -295,13 +303,10 @@ def thepage(request):
     return render(request, 'api/thepage.html', context)
     
 def mainpage(request):
-    #check if user is authenticated.
-    #check if they have paid for games.
-    #check if they have paid for either of the subscriptions.
-    #FixedMatchGame, BetikaJackpotGame, SportPesaJackpotGame, SubscriptionGame
     games = AdminGame.objects.all()
     betikagames = BetikaJackpotGame.objects.all()
     sportpesagames = SportPesaJackpotGame.objects.all()
     subscriptiongames = SubscriptionGame.objects.all()
-    context = { 'games' : games, 'betikagames' : betikagames, 'sportpesagames' : sportpesagames, 'subscriptiongames' : subscriptiongames }
+    context = {'games' : games, 'betikagames' : betikagames, 'sportpesagames' : sportpesagames, 'subscriptiongames' : subscriptiongames}
+    
     return render(request, 'api/main/index.html', context)

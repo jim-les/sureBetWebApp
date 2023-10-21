@@ -129,7 +129,6 @@ theGames.forEach((game) => {
         return
     }
     game.style.display = 'none';
-
 })
 
 
@@ -227,6 +226,15 @@ vipBtn.addEventListener("click", function() {
     // paidGames.forEach(game => {
     //     game.classList.add('hide')
     // })
+    theGames.forEach((game) => {
+        let gameFeature = game.querySelector('.details')
+        if (gameFeature.innerHTML == 'SUBSCRIPTION' || gameFeature.innerHTML == 'SPORTPESA' || gameFeature.innerHTML == 'BETIKA'){
+            game.style.display = 'block';
+            return
+        }else{
+            game.style.display = 'none';
+        }
+    })
 
     const vipCards = document.querySelectorAll('.vip_card_container')
     vipCards.forEach(card => {

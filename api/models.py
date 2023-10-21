@@ -31,7 +31,6 @@ class AdminGame(models.Model):
     game_minute = models.IntegerField(default=18, null=True)
     game_first_half_result = models.CharField(max_length=255, default="-")
     game_second_half_result = models.CharField(max_length=255, default="-")
-    #result = models.IntegerField(choices=GAME_RESULT_CHOICES, default=2)
     GAME_WON = 'won'
     GAME_LOST = 'lost'
     GAME_WAITING = 'waiting'

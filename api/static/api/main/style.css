@@ -8,6 +8,7 @@
 }
 body{
     background: #fefefe;
+    position: relative;
 }
 /* main{
     width: 100%;
@@ -17,12 +18,13 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    //tesr
 } */
 header{
     width: 100%;
     height: 80px;
-    background: #11101b;
-    background-color: gold;
+    background: #DB9501;
+   
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,6 +35,13 @@ header{
     font-weight: bold;
     color: black;
 }
+
+.premier {
+    float: left;
+    left: 5px;
+    position: relative;
+}
+
 .text{
     color: black;
 }
@@ -45,9 +54,9 @@ header{
 .nav-bar ul li a{
     display: block;
     color: black;
-    font-size: 20px;
-    padding: 10px 25px;
-    border-radius: 50px;
+    font-size: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
     transition: 0.2s;
     margin: 0 5px;
 }
@@ -71,10 +80,12 @@ header{
     }
 }
 @media only screen and (max-width: 900px){
+     header{
+        padding: 0 1px;
+    }
     .nav-bar{
-        width: 100vw;
-        background: #11101b;
-        background: gold;
+        width: 110vw;
+        background: #DB9501;
         overflow: hidden;
         height: 80px;
         padding: 0;
@@ -98,24 +109,24 @@ header{
 }
 @media only screen and (max-width: 400px){
     header{
-        padding: 0 10px;
+        padding: 0 5px;
     }
-    .logo{
+    .logoz{
         display: none;
     }
     .nav-bar ul li a{
         display: block;
         color: black;
-        font-size: 12px;
+        font-size: 10px;
         padding: 5px 15px;
-        border-radius: 50px;
+        border-radius: 20px;
         transition: 0.2s;
         margin: 0 5px;
     }
 }
 @media only screen and (max-width: 300px){
     header{
-        padding: 0 10px;
+        padding: 0 5px;
     }
     .logo{
         display: none;
@@ -149,12 +160,14 @@ section.table .filterWrapper .filter{
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
+    color: hsl(61, 96%, 52%);
 }
 
 section.table .filterWrapper .selected{
     border: 1px solid hsl(61, 96%, 52%);
     background-color: hsl(61, 96%, 52%);
     font-weight: bold;
+    color: black;
 }
 
 .modal {
@@ -184,11 +197,11 @@ section.table .hide{
 
 .game_container{
     border: 1px solid black;
-    margin: 10px 10px;
+    margin: 7px 20px;
     max-width: 600px;
     border-radius: 6px;
     position: relative;
-    margin-bottom: 30px;
+    overflow: hidden;
 }
 .game_container .game_container_top{
     display: grid;
@@ -255,10 +268,10 @@ section.table .hide{
 }
 .game_container .game_container_top_right .date,
 .game_container .game_container_top_right .time{
-    text-align: center;
     padding: 3px 0;
     color: gainsboro;
     font-family: 'Roboto', sans-serif;
+    text-align: left;
 }
 .game_container .game_container_top .game_container_top_right .half_results .separator{
     padding: 0 2px;
@@ -273,14 +286,14 @@ section.table .hide{
 }
 .game_container .game_container_bottom .admin_text{
     background-color: #da9401;
-    padding: 10px;
+    padding: 2px 10px;
     border-right: 1px solid black;
     font-family: 'Roboto', sans-serif;
 }
 .game_container .game_container_bottom .admin_result{
     color: #da9401;
     background-color: #262827;
-    padding: 10px;
+    padding: 2px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
 }
@@ -320,7 +333,7 @@ section.table .hide{
     .game_container .game_container_bottom{
         display: grid;
         grid-template-columns: 3.5fr 1fr;
-        height: 40px;
+        height: 20px;
     }
     .game_container .game_container_top_left{
         display: grid;
@@ -342,17 +355,17 @@ section.table .hide{
 
 .vip_card_container{
     border: 1px solid black;
-    width: 600px;
+    max-width: 600px;
     min-height: 100px;
     border-radius: 6px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    margin: 5px 20px;
     background-color: rgb(31, 66, 85);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
+    color: white;
 }
 .white_background{
     background-color: white;
@@ -431,3 +444,6 @@ section.table .hide{
 .hide{
     display: none;
 }
+
+
+

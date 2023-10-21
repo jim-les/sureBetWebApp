@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+/* 
+Background color - r(25)g(21)b(37)
+#191525
+
+LightBlue - r(19)g(27)b(35)
+#131b23
+210°, 30%, 11%
+
+DarkBlue -r(16)g(23)b(30)
+#10171e
+210°, 30%, 9%
+
+*/
+body{
+    background-color: #191525;
+}
+section.table{
+    width: 100vw;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+section.table table{
+    background-color: #18242F;
+    /* background-color: hsl(210, 30%, 9%); */
+    padding: 10px 20px;
+    /* border-collapse: collapse; */
+}
+
+section.table table thead tr th{
+    color: #9ea3a8;
+    font-size: 10px;
+}
+
+section.table table tbody tr.gameData{
+    cursor: pointer;
+    margin-bottom: 10px;
+    
+    /* background-color: #191525; */
+}
+
+
+section.table table tbody tr td{
+    padding: 2px;
+    padding-left: 1px;
+    padding-right: 1px;
+    color: white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 600;
+    /* border: 1px solid green; */
+}
+
+section.table table tbody tr td.OddWrapper{
+    padding: 0;
+}
+
+
+section.table table tbody tr td p.time,
+section.table table tbody tr td p.date{
+    color: #9ea3a8;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 600;
+}
+
+section.table table tbody tr td.timeWrapper{
+    padding-right: 10px;
+}
+
+section.table table tbody tr td.teamsWrapper{
+    height: 100%;
+    padding-right: 20px;
+}
+
+section.table table tbody tr td div.teams{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+section.table table tbody tr td div.teams p.teamHome{
+    padding-bottom: 5px;
+}
+section.table table tbody tr td div.teams p.teamAway{
+    padding-top: 5px;
+}
+
+section.table table tbody tr td div.teams p,
+section.table table tbody tr td div.teams span{
+    color:  white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 700;
+}
+
+section.table table tbody tr td p.oddLeft{
+    background-color: #334C5C;
+    padding: 4px 8px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    color: white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 700;
+}
+section.table table tbody tr td p.oddMiddle{
+    background-color: #334C5C;
+    padding: 4px 8px;
+    color: white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 700;
+}
+section.table table tbody tr td p.oddRight{
+    background-color: #334C5C;
+    padding: 4px 8px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    color: white;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: .5px;
+    font-weight: 700;
+}

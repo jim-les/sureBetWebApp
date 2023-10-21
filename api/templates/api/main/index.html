@@ -5,93 +5,313 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sureBetTips</title>
+    <title>sureBetTipss..</title>
     <link rel="stylesheet" href="{% static 'api/main/style.css' %}">
+    <link rel="stylesheet" href="{% static 'api/main/marquee.css' %}">
+    
+    <style>
+         /* The side navigation menu */
+            .sidenav {
+              height: 100%; /* 100% Full-height */
+              width: 0; /* 0 width - change this with JavaScript */
+              position: fixed; /* Stay in place */
+              z-index: 1; /* Stay on top */
+              top: 0; /* Stay at the top */
+              left: 0;
+              background-color: #DB9501; /* Black*/
+              overflow-x: hidden; /* Disable horizontal scroll */
+              padding-top: 60px; /* Place content 60px from the top */
+              transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+            }
+            
+            /* The navigation menu links */
+            .sidenav a {
+              padding: 8px 8px 8px 32px;
+              text-decoration: none;
+              font-size: 25px;
+              color: white;
+              display: block;
+              transition: 0.3s;
+            }
+            
+            /* When you mouse over the navigation links, change their color */
+            .sidenav a:hover {
+              color: #f1f1f1;
+            }
+            
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn {
+              position: absolute;
+              top: 0;
+              right: 25px;
+              font-size: 36px;
+              margin-left: 50px;
+            }
+            
+            /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+            #main {
+              transition: margin-left .5s;
+              padding: 20px;
+            }
+            
+            .comments{ 
+                visibility:hidden;
+                height: 0px;
+            }
+            .game_container .game_container_comments {
+              height: 0px;
+             
+            }
+            
+            /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+            @media screen and (max-height: 450px) {
+              .sidenav {padding-top: 15px;}
+              .sidenav a {font-size: 18px;}
+            } 
+            body {
+             background-image: url("{% static 'api/main/background.jpg' %}");
+            }
+            .game_container_top_left {
+                background: white;
+            }
+           
+            .date {
+                text-align: left;
+            }
+            .time {
+                text-align: left;
+            }
+            @media only screen and (min-width: 1200px){
+                body{
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-image: url("{% static 'api/main/background2.jpg' %}");
+            
+                }
+            }
+            </style>
 </head>
 <body>
+
     <header>
-        <div class="logo">sureBet</div>
+        <div class="logo"><img src="{% static 'api/main/logo_premier.png' %}" alt="" srcset="" width="150" class="premier"></div>
+        <span onclick="openNav()"></span>
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </div>
-        <nav class="nav-bar">
-            <ul>
-                {% if user.is_authenticated %}
-                <li>
-                    <a href="" class="text">{{ user.username }}</a>
-                </li>
-                {% else %}
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="#">Account</a>
+          <a href="#">Spin to win</a>
+          <a href="#">Share Us</a>
+          <a href="#">Contact</a>
+        </div>
+        
+        <!--nav class="nav-bar">
+            
+        </nav-->
+        <nav class="nav-bar" style="text-align: left;">
+            
+            <ul style="padding-right:3px;">
                 <li>
                     <a href="" class="text">Guest</a>
                 </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'logout' %}" class="active">Logout</a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a href="{% url 'login' %}" class="active">Login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'signUp' %}" class="active">Register</a>
-                    </li>
-                {% endif %}
+                <li>
+                </li>
 
-
-                
+                <li>
+                    <a href="{% url 'login' %}" class="active">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'signUp' %}" class="active">Register</a>
+                </li>
+        
             </ul>
+            
+            <table>
+                <tr>
+                    <td><img src="{% static 'api/main/spin_numbers.png' %}" alt="" srcset="" width="30"></td>
+                    <td><img src="{% static 'api/main/wp.png' %}" alt="" srcset="" width="30"></td>
+                    <td><img src="{% static 'api/main/coin_icon.png' %}" alt="" srcset="" width="30"></td>
+                    <td><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30"></td>
+                </tr>
+            </table>
         </nav>
     </header>
 
+    <style>
+        /* payment_popup */
+        .payment_pop{
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            z-index: 1000;
+        }
+
+        .payment_container{
+            width: 90%;
+            height: 90%;
+            background-color: #da9401;
+            box-shadow: 15px 15px 10px 10px black;
+            display: flex;
+        }
+
+        .payment_container li{
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .payment_container .subscription_btns{
+            width: 400px;
+            height: 80px;
+            padding: 0 20px;
+            box-shadow: 0 0 10px 10px black;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .payment_container input[type="radio"]{
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+
+        .payment_container input[type='text']{
+            width: 400px;
+            height: 60px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .payment_container input[type='submit']{
+            width: 194px;
+            height: 60px;
+            background-color: green;
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .payment_container button{
+            width: 194px;
+            height: 60px;
+            background-color: black;
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+        }
+    </style>
+
+    <!-- payment popup -->
+    <div class="payment_pop">
+        <div class="payment_container">
+            <div style="width: 50%; background-color: white; height: 100%; display: flex; justify-content: center; align-items: center">
+                <div>
+                    <h1 style="color: #da9401; font-size: 80px;">Sure Bet Tips</h1>
+                    <ul>
+                        <li><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30">Get the best game Tips</li>
+                        <li><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30">Get unlimited access to your accounts</li>
+                        <li><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30">Get to see the latest games</li>
+                        <li><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30">Enjoy using sure bet</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="width: 50%; height: 100%; display: flex; align-items: center; padding: 20px 50px; ">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <h2 style="color: white ; display: flex; align-items: center; gap: 20px;"><img src="{% static 'api/main/ic_premium_colored.png' %}" alt="" srcset="" width="30"> Our Plans</h2>
+                    </div>
+
+                    <div>
+                        <div class="premium_btn subscription_btns">
+                            <input type="radio" name="subscription_type" id="subscription_type" value="premuim">
+                            <h1>Premium</h1>  <h3>900/month</h3>
+                        </div>
+
+                        <div class="lite_btn subscription_btns">
+                            <input type="radio" name="subscription_type" id="subscription_type" value="lite">
+                            <h1> Lite </h1>  <h3> 600/month</h3>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div >
+                        <label for="name">Your name</label><br>
+                        <input type="text" name="name" id="" class="name"> 
+                    </div>
+
+                    <div>
+                        <label for="phone_number">Phone Number</label> <br>
+                        <input type="text" name="phone_number" id="" class="phone_number">
+                    </div>
+
+                    <div>
+                        <input type="submit" value="SUBSCRIBE">
+                        <button onclick="closePopup()">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content section -->
     <main>
         <section class="table">
             <div class="filterWrapper">
                 <p id="idFree" class="filter selected">Free</p>
                 <p id="idPaid" class="filter">Paid</p>
                 <p id="idVIP" class="filter">VIP</p>
-                <p id="idWins" class="filter">Wins</p>
+                <p id="idWins" class="filter">Wins.</p>
             </div>
         </section>
        
         <div class="vip_card_container white_background hide">
             <img src="{% static 'api/main/star.svg' %}" alt="" srcset="">
-            <h1 class="black_text">Subscription Matches</h1>
-            <div class="status status_red">
+            <h2 class="black_text">Subscription Matches</h2>
+            <div class="status status_red" onclick="Subscribe();">
                 <p>
-                    IS INACTIVE
+                    check subscriptions
                 </p>
             </div>
         </div> 
     
         <div class="vip_card_container hide">
             <img src="{% static 'api/main/actionbar_logo_small.png' %}" alt="" srcset="">
-            <h1>SportPesa Jackpot</h1>
-            <div class="status">
+            <h2>SportPesa Jackpot</h2>
+            <div class="status" onclick="Subscribe();">
                 <p>
-                    IS ACTIVE
+                    check subscriptions
                 </p>
             </div>
         </div> 
     
         <div class="vip_card_container hide">
             <img src="{% static 'api/main/logo_KE.webp' %}" alt="" srcset="">
-            <h1>Betika Jackpot</h1>
-            <div class="status">
+            <h2>Betika Jackpot</h2>
+            <div class="status" onclick="Subscribe();">
                 <p>
-                    IS INACTIVE
+                    check subscriptions
                 </p>
             </div>
         </div>
     
         <div class="vip_card_container white_background hide">
             <img src="{% static 'api/main/medal.svg' %}" alt="" srcset="">
-            <h1 class="black_text">Fixed Matches</h1>
-            <div class="status status_red">
+            <h2 class="black_text">Fixed Matches</h2>
+            <div class="status status_red" onclick="Subscribe();">
                 <p>
-                    IS INACTIVE
+                    check subscriptions
                 </p>
             </div>
         </div>
@@ -109,7 +329,7 @@
                 <!-- row -->
                 <div class="game_container_top_left">
                     <div class="game_details">
-                        <img src="{{ game.game_competition.competition_image.url }}" alt="" srcset="">
+                        <img src="static{{ game.game_competition.competition_image.url }}" alt="" srcset="">
                     </div>
                     <div class="game_team_details">
                         <h2>{{ game.game_competition.competition_name }}</h2>
@@ -133,11 +353,36 @@
             </div>
             <div class="game_container_bottom">
                 <!-- row -->
-                <P class="admin_text">{{game.prediction}}</P>
+                <P class="admin_text">
+                    {{game.prediction}}
+                    <span class="expert_analysis" id="{{ game.id}}" style="float: right;">Expert Analysis <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                    <br>
+                    
+                    </P>
+                
                 <p class="admin_result">{{game.result}}</p>
             </div>
-            <div class="game_container_comments">
-                <p class="game_comment">Example comment</p>
+            <div class="game_container_comments comments" id="comm_id_{{ game.id}}">
+                <span class="">{{game.comments}}</span>
+            </div>
+            <div class="game_container_buttons">
+                <table style="width: 100%">
+                    <tr>
+                        <td class="team">
+                            <p>{{ game.home_team}}</p>
+                            <p>{{ game.home_odd}}</p>
+                        </td>
+                        <td class="team">
+                            <p>Draw</p>
+                            <p>{{ game.draw_odd}}</p>
+                        </td>
+                        <td class="team">
+                            <p>{{ game.away_team}}</p>
+                            <p>{{ game.away_odd}}</p>
+                        </td>
+                    </tr>
+
+                </table>
             </div>
             <div class="alertImage">
                 <img src="{% static 'api/main/warning-circle.svg' %}" alt="moreinfo" srcset="">
@@ -298,6 +543,13 @@
 
     
     </main>
+    <div style="position:fixed; bottom:0px;">
+        <div class="promo-carousel" id="grouploop-1">
+    		<div class="item-wrap">
+    		</div>
+	    </div>
+    </div>
+    
 
     <script>
         hamburger = document.querySelector(".hamburger")
@@ -305,7 +557,119 @@
             navBar = document.querySelector(".nav-bar")
             navBar.classList.toggle("active")
         }
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+        
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft = "0";
+        } 
     </script>
     <script src="{% static 'api/main/main.js' %}"></script>
+    <script src="{% static 'api/jquery.js' %}"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <script src="{% static 'api/grouploop.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+           
+				
+					
+					$('.item-wrap').append('<div class="item active bounceme" style="width: 30px;"><a href="#">Over 80% Win rate</a></div>');
+					$('.item-wrap').append('<div class="item"><a href="#">Guaranteed Profit</a></div>');
+					$('.item-wrap').append('<div class="item"><a href="#">Expert Analysis</a></div>');
+					$('.item-wrap').append('<div class="item"><a href="#">Proven History</a></div>');
+					$('.item-wrap').append('<div class="item"><a href="#">Mpesa Allowed</a></div>');
+					$('.item-wrap').append('<div class="item"><a href="#">Pay via Paybill</a></div>');
+					
+					$('.item-wrap').append('<div class="item" style="visibility: none;"><a href="#">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a></div>');
+			
+				
+			
+			
+            $('#grouploop-1').grouploop({
+				velocity: 1,
+				forward: false,
+				pauseOnHover: true,
+				childNode: ".item",
+				childWrapper: ".item-wrap",
+				complete: function () { console.log("Initialized a grouploop with id: " + $(this).attr('id')) },
+				stickFirstItem: true
+			});
+		
+            
+            $('.expert_analysis').click(function(){
+                var comm = '#comm_id_'+$(this).attr("id");
+              if ( $(comm).css('visibility') == 'hidden' )
+                $(comm).css({
+                                   'visibility' : 'visible',
+                                   'height' : 'auto',
+                                   'padding': '5px;',
+                                   'color': 'white'
+                                });
+              else
+                $(comm).css({
+                                   'visibility' : 'hidden',
+                                   'height' : '0px'
+                                });
+            });
+			
+			setInterval(function() 
+            {
+              $(".bounceme").animate({
+                    width: "210px",
+                    opacity: 1,
+                    fontSize: "20px",
+                    borderWidth: "0px"
+                  }, 800 );
+                 $(".bounceme").animate({
+                    width: "200px",
+                    opacity: 1,
+                    fontSize: "16px",
+                    borderWidth: "0px"
+                  }, 1000 );
+             },5000)
+        });
+    </script>
+
+    <!-- payment popup -->
+    <script>
+        var subscription_popup = false;
+        // $('main').css('opacity', '0.2');
+
+        function Subscribe() {
+            if (!subscription_popup) {
+                subscription_popup = true;
+            }
+
+        }
+
+        function closePopup(){
+            $('.payment_pop').css('display', 'none')
+            $('main').css('opacity', '1');
+
+        }
+        function reload(){
+            if(!subscription_popup){
+                $('.payment_pop').css('display', 'none')
+            }
+    
+            if(subscription_popup ==true){
+                $('.payment_pop').css('display', 'flex')
+            }
+        }
+
+        setInterval(reload, 100)
+
+        
+
+        
+
+
+
+    </script>
 </body>
 </html>

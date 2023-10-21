@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav{
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    padding-left: 40px;
+    font-family: sans-serif;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section .card{
+    width: 40vw;
+    margin-top: 10px;
+}
+
+section .card .cardTop,
+section .card .cardBottom{
+    border: 1px solid black;
+    width: 100%;
+}
+
+section .card .cardTop,
+section .card .cardTop .gameDetails,
+section .card .cardTop .gameOdds,
+section .card .cardTop .gameDateTime{
+    display: flex;
+    flex-direction: row;
+}
+
+section .card .cardTop .gameDetails {
+    flex: 1
+}
+section .card .cardTop .gameDetails .competition{
+    flex: 1; 
+}
+section .card .cardTop .gameDetails .homeTeam{
+    flex: 1;
+}
+section .card .cardTop .gameDetails span{
+    flex: .5;
+}   
+section .card .cardTop .gameDetails .awayTeam{
+    flex: 1;
+}
+
+section .card .cardTop .gameOdds{
+    flex: 1;
+}
+section .card .cardTop .gameOdds .hOdd{
+    background-color: red;
+}
+section .card .cardTop .gameOdds .dOdd{
+    background-color: aqua;
+}
+section .card .cardTop .gameOdds .aOdd{
+    background-color: greenyellow;
+}
+
+section .card .cardTop .gameDateTime{
+    flex: 1;
+}
+section .card .cardTop .gameDateTime .date{
+
+}
+section .card .cardTop .gameDateTime .time{
+    
+}
+
+
+section .card .cardTop .gameDetails .competition img{
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6dp9$#^b2$if5uzq*4zjwhm5)z6btpr_!jgv#cj=!!!_j_g7-*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sure-bet-tips.com', 'www.sure-bet-tips.com']
+ALLOWED_HOSTS = ['sure-bet-tips.com', 'www.sure-bet-tips.com', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -76,24 +76,26 @@ WSGI_APPLICATION = 'sureBetWebApp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mypense3_sureBet',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'USER': 'mypense3_chairman',
-        'PASSWORD': 'sureBetSecur3!'
-    }
-}
-'''
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mypense3_sureBetDjangoDatabase',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'USER': 'mypense3_surebetAdmin',
+#         'PASSWORD': 'surebetadminpassword'
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -132,7 +134,7 @@ SESSION_COOKIE_AGE = 360 * 24 * 60 * 60
 
 LOGIN_URL = '/login/'
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
